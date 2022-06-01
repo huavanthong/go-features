@@ -4,34 +4,32 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	
 
 	"log"
 
 	"github.com/gorilla/pat"
+	"github.com/gorilla/sessions"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/google"
-	"github.com/gorilla/sessions"
 )
 
-
 func main() {
-	
-	key := "Secret-session-key"  // Replace with your SESSION_SECRET or similar
-	maxAge := 86400 * 30  // 30 days
-	isProd := false       // Set to true when serving over https
+
+	key := "Secret-session-key" // Replace with your SESSION_SECRET or similar
+	maxAge := 86400 * 30        // 30 days
+	isProd := false             // Set to true when serving over https
 
 	store := sessions.NewCookieStore([]byte(key))
 	store.MaxAge(maxAge)
 	store.Options.Path = "/"
-	store.Options.HttpOnly = true   // HttpOnly should always be enabled
+	store.Options.HttpOnly = true // HttpOnly should always be enabled
 	store.Options.Secure = isProd
 
 	gothic.Store = store
 
 	goth.UseProviders(
-		google.New("our-google-client-id", "our-google-client-secret", "http://localhost:3000/auth/google/callback", "email", "profile"),
+		google.New("207194625048-ctiigt8ks7979603k9ncg6u36sc07me2.apps.googleusercontent.com", "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", "http://localhost:3000/auth/google/callback", "email", "profile"),
 	)
 
 	p := pat.New()
