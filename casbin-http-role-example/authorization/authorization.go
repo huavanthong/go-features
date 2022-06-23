@@ -2,11 +2,12 @@ package authorization
 
 import (
 	"errors"
+	"log"
+	"net/http"
+
 	"github.com/alexedwards/scs/session"
 	"github.com/casbin/casbin"
 	"github.com/zupzup/casbin-http-role-example/model"
-	"log"
-	"net/http"
 )
 
 // Authorizer is a middleware for authorization
